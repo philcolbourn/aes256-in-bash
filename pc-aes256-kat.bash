@@ -484,10 +484,9 @@ process_file(){
     done
     # read test
     while [[ $_k == "COUNT" ]]; do
-        read _k _e _v _r; _k=${_k//[[:cntrl:]]/}; eval $_k=$_v
-        read _k _e _v _r; _k=${_k//[[:cntrl:]]/}; eval $_k=$_v
-        read _k _e _v _r; _k=${_k//[[:cntrl:]]/}; eval $_k=$_v
-        read _k _e _v _r; _k=${_k//[[:cntrl:]]/}; eval $_k=$_v
+        while { read _k _e _v _r; [[ $_e != "" ]]; }; do
+            _k=${_k//[[:cntrl:]]/}; eval $_k=$_v
+        done
 
         process_set $_mode $_m
         [[ $? -ne 0 ]] && exit 1
@@ -505,6 +504,7 @@ process_file(){
 
 run_KAT_AES_tests(){
     local _f
+    #for _f in KAT_AES/ECBGFSbox256.rsp; do
     for _f in KAT_AES/*256.rsp; do
         mode=$_f
         mode=${mode#*\/}
