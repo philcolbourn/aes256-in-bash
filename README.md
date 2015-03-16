@@ -7,13 +7,11 @@ Based on "A byte-oriented AES-256 implementation" by Ilya Levin http://www.liter
 
 Basically a simple translation, taking some old bash bugs into account.
 
-Passes all KAT *256.rsp tests except CFB* tests from http://csrc.nist.gov/groups/STM/cavp/documents/aes/KAT_AES.zip
+Passes all KAT 256.rsp tests except CFB tests from http://csrc.nist.gov/groups/STM/cavp/documents/aes/KAT_AES.zip
 
-Table based using _sbox_ and _sbox_inv_ tables rather than functions.
-Macros _F_ and _FD_ as well as function _xtime_ are implemented as computed tables. 
+Table based using sbox and sbox_inv tables rather than functions. Macros F and FD as well as function xtime are implemented as computed tables.
 
-_F_ is actually no longer generated since it is identical (in operation) to _xtime_.
-
+F is actually no longer generated since it is identical (in operation) to xtime.
 
 #define F(x)   (((x) << 1) ^ ((((x)>>7) & 1) * 0x1b))
 #define FD(x)  (((x) >> 1) ^ (((x) & 1) ? 0x8d : 0))
