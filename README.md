@@ -13,9 +13,11 @@ Table based using sbox and sbox_inv tables rather than functions. Macros F and F
 
 F is actually no longer generated since it is identical (in operation) to xtime.
 
+```
 #define F(x)   (((x) << 1) ^ ((((x)>>7) & 1) * 0x1b))
 #define FD(x)  (((x) >> 1) ^ (((x) & 1) ? 0x8d : 0))
 uint8_t rj_xtime(uint8_t x) 
 {
     return (x & 0x80) ? ((x << 1) ^ 0x1b) : (x << 1);
 } /* rj_xtime */
+```
